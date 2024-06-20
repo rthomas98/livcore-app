@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm, Link } from '@inertiajs/react';
 
@@ -8,6 +8,7 @@ export default function Edit({ auth, member }) {
         last_name: member.last_name || '',
         phone: member.phone || '',
         permission_level: member.permission_level || '',
+        email: member.email || '', // Add email field
     });
 
     const handleChange = (e) => {
@@ -46,6 +47,7 @@ export default function Edit({ auth, member }) {
                                     <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
                                         <p className="text-xl font-bold text-gray-900 sm:text-2xl">{member.first_name} {member.last_name}</p>
                                         <p className="text-sm font-medium text-gray-600">{member.permission_level}</p>
+                                        <p className="text-sm font-medium text-gray-600">{member.email}</p> {/* Add email display */}
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +113,19 @@ export default function Edit({ auth, member }) {
                                         <option value="Admin">Admin</option>
                                     </select>
                                     {errors.permission_level && <div className="text-red-600">{errors.permission_level}</div>}
+                                </div>
+
+                                <div className="sm:col-span-1"> {/* Add this block */}
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        value={data.email}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    />
+                                    {errors.email && <div className="text-red-600">{errors.email}</div>}
                                 </div>
                             </div>
                             <div className="mt-6 flex items-center justify-end">
