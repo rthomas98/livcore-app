@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\CustomerController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -17,11 +19,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
+    return Inertia::render('Dashboard');
 })->name('dashboard');
 
 // Member routes
 Route::resource('members', MemberController::class)->middleware(['auth']);
+Route::resource('customers', CustomerController::class)->middleware(['auth']);
 
 // Invitation routes
 Route::get('invitations/accept/{token}', [InvitationController::class, 'accept'])->name('invitations.accept');
