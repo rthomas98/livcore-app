@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm, Link } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 
 export default function Edit({ auth, member }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -8,7 +9,7 @@ export default function Edit({ auth, member }) {
         last_name: member.last_name || '',
         phone: member.phone || '',
         permission_level: member.permission_level || '',
-        email: member.email || '', // Add email field
+        email: member.email || '',
     });
 
     const handleChange = (e) => {
@@ -22,6 +23,17 @@ export default function Edit({ auth, member }) {
                 console.log('Member updated successfully.');
             },
         });
+    };
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        if (confirm("Are you sure you want to delete this member?")) {
+            Inertia.delete(route('members.destroy', member.id), {
+                onSuccess: () => {
+                    console.log('Member deleted successfully.');
+                },
+            });
+        }
     };
 
     return (
@@ -41,13 +53,12 @@ export default function Edit({ auth, member }) {
                                     <div className="flex-shrink-0">
                                         <img className="mx-auto h-20 w-20 rounded-full"
                                              src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                             alt=""
-                                        />
+                                             alt=""/>
                                     </div>
                                     <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
                                         <p className="text-xl font-bold text-gray-900 sm:text-2xl">{member.first_name} {member.last_name}</p>
                                         <p className="text-sm font-medium text-gray-600">{member.permission_level}</p>
-                                        <p className="text-sm font-medium text-gray-600">{member.email}</p> {/* Add email display */}
+                                        <p className="text-sm font-medium text-gray-600">{member.email}</p>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +126,7 @@ export default function Edit({ auth, member }) {
                                     {errors.permission_level && <div className="text-red-600">{errors.permission_level}</div>}
                                 </div>
 
-                                <div className="sm:col-span-1"> {/* Add this block */}
+                                <div className="sm:col-span-1">
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                                     <input
                                         type="email"
@@ -141,6 +152,13 @@ export default function Edit({ auth, member }) {
                                     disabled={processing}
                                 >
                                     Save Changes
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleDelete}
+                                    className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                >
+                                    Delete Member
                                 </button>
                             </div>
                         </form>

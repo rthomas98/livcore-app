@@ -75,4 +75,5 @@ class MemberController extends Controller
 
         return redirect()->route('members.index')->with('message', 'Member deleted successfully.');
     }
+
 }
