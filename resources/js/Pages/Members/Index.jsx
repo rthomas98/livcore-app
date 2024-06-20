@@ -21,17 +21,30 @@ export default function Index({ auth, members }) {
                             {flash.message}
                         </div>
                     )}
-                    <div className="mb-4">
-                        <Link
-                            href={route('members.create')}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                            Add New Member
-                        </Link>
+
+                    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6 mb-5">
+                        <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
+                            <div className="ml-4 mt-4">
+                                <h3 className="text-base font-semibold leading-6 text-gray-900">Members</h3>
+                                <p className="mt-1 text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit quam corrupti consectetur.</p>
+                            </div>
+                            <div className="ml-4 mt-4 flex-shrink-0">
+
+                                <Link
+                                    href={route('members.create')}
+                                    className="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                    Add New Member
+                                </Link>
+                            </div>
+                        </div>
                     </div>
+
                     <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {members.map((member) => (
-                            <li key={member.id} className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+                            <li key={member.id}
+                                className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
                                 <Link href={route('members.show', member.id)} className="block hover:bg-gray-50">
                                     <div className="flex w-full items-center justify-between space-x-6 p-6">
                                         <div className="flex-1 truncate">
