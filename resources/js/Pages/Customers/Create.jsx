@@ -3,6 +3,15 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from '@inertiajs/inertia';
 import { Head } from '@inertiajs/react';
 
+const states = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
+    'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
+    'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+    'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+    'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia',
+    'Wisconsin', 'Wyoming'
+];
+
 export default function Create({ auth, route }) {
     const [form, setForm] = useState({
         name: '',
@@ -12,6 +21,13 @@ export default function Create({ auth, route }) {
         email: '',
         phone: '',
         secondary_phone: '',
+        billing_address: '',
+        billing_country: '',
+        billing_address2: '',
+        billing_city: '',
+        billing_state: '',
+        billing_zip: '',
+        billing_county: '',
     });
 
     const handleChange = (e) => {

@@ -17,5 +17,12 @@ class Customer extends Model
         'email',
         'phone',
         'secondary_phone',
+        'billing_address',
+        'billing_country',
+        'billing_address2',
+        'billing_city',
+        'billing_state',
+        'billing_zip',
+        'billing_county',
     ];
 }
